@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node index.js)",
+      "Bash(node -e \"require\\('dotenv'\\).config\\(\\); console.log\\('PORT:', process.env.PORT\\); console.log\\('CLIENT_URL:', process.env.CLIENT_URL\\);\")",
+      "Bash(echo \"EXIT: $?\")",
+      "Bash(npm install *)",
+      "Bash(node -e \"require\\('sharp'\\); console.log\\('sharp OK'\\)\")"
+    ]
+  }
+}

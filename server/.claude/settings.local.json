@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C \"C:\\\\Users\\\\DELL\\\\Desktop\\\\Ai Arena\" add --dry-run .)",
+      "Bash(git -C \"C:\\\\Users\\\\DELL\\\\Desktop\\\\Ai Arena\" status --short)"
+    ]
+  }
+}
