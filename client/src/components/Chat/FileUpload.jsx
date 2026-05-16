@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Paperclip, X, FileText } from 'lucide-react';
 
 export default function FileUpload({ file, onFileSelect, onClear }) {
@@ -30,13 +30,13 @@ export default function FileUpload({ file, onFileSelect, onClear }) {
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="flex items-center gap-2 px-3 py-2 rounded-xl bg-purple-500/10 border border-purple-500/20"
+        className="flex items-center gap-2 px-3 py-2 rounded-xl bg-amber-700/10 border border-amber-600/15"
       >
-        <FileText className="w-3.5 h-3.5 text-purple-400 flex-shrink-0" />
-        <span className="text-xs text-purple-300 truncate max-w-[160px]">{file.name}</span>
+        <FileText className="w-3.5 h-3.5 text-amber-400 flex-shrink-0" />
+        <span className="text-xs text-amber-300 truncate max-w-[160px]">{file.name}</span>
         <button
           onClick={onClear}
-          className="p-0.5 rounded-md hover:bg-purple-500/20 text-purple-400 hover:text-purple-200 transition-colors"
+          className="p-0.5 rounded-md hover:bg-amber-600/15 text-amber-500 hover:text-amber-200 transition-colors"
         >
           <X className="w-3 h-3" />
         </button>
@@ -53,8 +53,8 @@ export default function FileUpload({ file, onFileSelect, onClear }) {
         onDrop={handleDrop}
         className={`p-2 rounded-xl transition-all ${
           dragging
-            ? 'bg-purple-500/20 border border-purple-500/40 text-purple-300'
-            : 'hover:bg-white/10 text-slate-400 hover:text-slate-200'
+            ? 'bg-amber-700/15 border border-amber-600/30 text-amber-300'
+            : 'hover:bg-white/6 text-stone-500 hover:text-stone-300'
         }`}
         title="Attach file (PDF, DOCX, TXT)"
       >

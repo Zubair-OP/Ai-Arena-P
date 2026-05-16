@@ -18,11 +18,12 @@ function ProtectedLayout() {
   const [activeConversation, setActiveConversation] = useState(null);
   const [viewMode, setViewMode] = useState('arena');
   const [sidebarRefresh, setSidebarRefresh] = useState(0);
+  const [newChatKey, setNewChatKey] = useState(0);
 
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="w-8 h-8 rounded-full border-2 border-purple-500 border-t-transparent animate-spin" />
+        <div className="w-8 h-8 rounded-full border-2 border-amber-600 border-t-transparent animate-spin" />
       </div>
     );
   }
@@ -39,6 +40,7 @@ function ProtectedLayout() {
     setActiveConversation(null);
     setViewMode('arena');
     setSidebarOpen(false);
+    setNewChatKey((k) => k + 1);
   };
 
   const handleConversationCreated = () => {
@@ -49,8 +51,8 @@ function ProtectedLayout() {
     <div className="flex h-screen overflow-hidden relative">
       {/* Background blobs */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full bg-purple-600/8 blur-[140px]" />
-        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] rounded-full bg-cyan-500/6 blur-[120px]" />
+        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full bg-amber-800/8 blur-[150px]" />
+        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] rounded-full bg-orange-900/6 blur-[130px]" />
       </div>
 
       {/* Desktop sidebar */}
@@ -83,10 +85,10 @@ function ProtectedLayout() {
       {/* Main content */}
       <div className="flex-1 flex flex-col min-w-0 relative">
         {/* Top bar */}
-        <header className="flex items-center gap-3 px-4 py-3 border-b border-white/10 bg-black/20 backdrop-blur-xl flex-shrink-0">
+        <header className="flex items-center gap-3 px-4 py-3 border-b border-white/[0.07] bg-black/25 backdrop-blur-xl flex-shrink-0">
           <button
             onClick={() => setSidebarOpen((p) => !p)}
-            className="p-2 rounded-xl hover:bg-white/10 text-slate-400 hover:text-white transition-colors"
+            className="p-2 rounded-xl hover:bg-white/6 text-stone-500 hover:text-stone-200 transition-colors"
           >
             <Menu className="w-4 h-4" />
           </button>
@@ -95,15 +97,15 @@ function ProtectedLayout() {
             <span className="text-sm font-semibold gradient-text flex-shrink-0">AI Arena</span>
             {activeConversation && viewMode === 'history' && (
               <>
-                <span className="text-slate-600">/</span>
-                <span className="text-xs text-slate-400 truncate">
+                <span className="text-stone-700">/</span>
+                <span className="text-xs text-stone-500 truncate">
                   {activeConversation.title || 'Conversation'}
                 </span>
               </>
             )}
           </div>
 
-          <div className="flex items-center gap-1 bg-white/5 border border-white/10 rounded-xl p-1 flex-shrink-0">
+          <div className="flex items-center gap-1 bg-white/[0.04] border border-white/[0.07] rounded-xl p-1 flex-shrink-0">
             <button
               onClick={() => {
                 setViewMode('arena');
@@ -111,8 +113,8 @@ function ProtectedLayout() {
               }}
               className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                 viewMode === 'arena'
-                  ? 'bg-purple-600/30 text-purple-300 border border-purple-500/30'
-                  : 'text-slate-400 hover:text-slate-200'
+                  ? 'bg-amber-700/20 text-amber-300 border border-amber-600/20'
+                  : 'text-stone-500 hover:text-stone-300'
               }`}
             >
               Arena
@@ -121,8 +123,8 @@ function ProtectedLayout() {
               onClick={() => setViewMode('history')}
               className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                 viewMode === 'history'
-                  ? 'bg-purple-600/30 text-purple-300 border border-purple-500/30'
-                  : 'text-slate-400 hover:text-slate-200'
+                  ? 'bg-amber-700/20 text-amber-300 border border-amber-600/20'
+                  : 'text-stone-500 hover:text-stone-300'
               }`}
             >
               History
@@ -134,7 +136,7 @@ function ProtectedLayout() {
         <AnimatePresence mode="wait">
           {viewMode === 'arena' ? (
             <motion.div
-              key="arena"
+              key={`arena-${newChatKey}`}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -171,10 +173,10 @@ export default function App() {
             position="top-right"
             toastOptions={{
               style: {
-                background: 'rgba(15, 15, 35, 0.95)',
+                background: 'rgba(24, 20, 16, 0.96)',
                 backdropFilter: 'blur(20px)',
-                border: '1px solid rgba(255,255,255,0.1)',
-                color: '#f1f5f9',
+                border: '1px solid rgba(255, 245, 230, 0.09)',
+                color: '#e8e0d5',
                 borderRadius: '12px',
                 fontSize: '13px',
               },

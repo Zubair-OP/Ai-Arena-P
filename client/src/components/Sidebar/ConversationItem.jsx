@@ -28,25 +28,25 @@ export default function ConversationItem({ conversation, isActive, onClick, onDe
       whileHover={{ x: 2 }}
       className={`w-full text-left px-3 py-2.5 rounded-xl transition-all group flex items-start gap-2.5 cursor-pointer ${
         isActive
-          ? 'bg-purple-600/20 border border-purple-500/30 text-white'
-          : 'hover:bg-white/5 text-slate-400 hover:text-slate-200 border border-transparent'
+          ? 'bg-amber-700/15 border border-amber-600/20 text-stone-100'
+          : 'hover:bg-white/[0.04] text-stone-500 hover:text-stone-300 border border-transparent'
       }`}
       onClick={onClick}
     >
       <MessageSquare
-        className={`w-3.5 h-3.5 mt-0.5 flex-shrink-0 ${isActive ? 'text-purple-400' : 'text-slate-500 group-hover:text-slate-400'}`}
+        className={`w-3.5 h-3.5 mt-0.5 flex-shrink-0 ${isActive ? 'text-amber-400' : 'text-stone-600 group-hover:text-stone-500'}`}
       />
       <div className="min-w-0 flex-1">
         <p className="text-xs font-medium truncate leading-relaxed">
           {conversation.title || 'Untitled conversation'}
         </p>
-        <p className="text-[10px] text-slate-500 mt-0.5">{formatted}</p>
+        <p className="text-[10px] text-stone-600 mt-0.5">{formatted}</p>
       </div>
 
       <button
         onClick={handleDelete}
         disabled={deleting}
-        className="opacity-0 group-hover:opacity-100 flex-shrink-0 p-1 rounded-lg hover:bg-red-500/20 text-slate-500 hover:text-red-400 transition-all mt-0.5"
+        className="opacity-0 group-hover:opacity-100 flex-shrink-0 p-1 rounded-lg hover:bg-red-500/15 text-stone-600 hover:text-red-400 transition-all mt-0.5"
         title="Delete conversation"
       >
         {deleting

@@ -35,7 +35,7 @@ export default function ChatInput({ onSend, disabled }) {
   };
 
   return (
-    <div className="p-4 border-t border-white/10 bg-black/20 backdrop-blur-xl">
+    <div className="p-4 border-t border-white/[0.07]" style={{ background: 'rgba(13,11,9,0.6)', backdropFilter: 'blur(20px)' }}>
       <div className="max-w-4xl mx-auto">
         {file && (
           <div className="mb-2 flex">
@@ -54,7 +54,7 @@ export default function ChatInput({ onSend, disabled }) {
             disabled={disabled}
             placeholder="Ask anything… (Shift+Enter for new line)"
             rows={1}
-            className="flex-1 bg-transparent resize-none text-sm text-white placeholder-slate-500 focus:outline-none py-1.5 leading-relaxed disabled:opacity-50"
+            className="flex-1 bg-transparent resize-none text-sm text-stone-200 placeholder-stone-600 focus:outline-none py-1.5 leading-relaxed disabled:opacity-50"
             style={{ maxHeight: '160px', overflowY: 'auto' }}
           />
           <motion.button
@@ -62,7 +62,7 @@ export default function ChatInput({ onSend, disabled }) {
             whileTap={{ scale: 0.95 }}
             onClick={handleSend}
             disabled={disabled || (!query.trim() && !file)}
-            className="p-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 disabled:opacity-40 disabled:cursor-not-allowed text-white transition-all flex-shrink-0"
+            className="p-2.5 rounded-xl bg-amber-700 hover:bg-amber-600 disabled:opacity-35 disabled:cursor-not-allowed text-stone-100 transition-all flex-shrink-0 shadow-md shadow-amber-900/25"
           >
             {disabled ? (
               <Loader2 className="w-4 h-4 animate-spin" />
@@ -71,7 +71,7 @@ export default function ChatInput({ onSend, disabled }) {
             )}
           </motion.button>
         </div>
-        <p className="text-center text-[10px] text-slate-600 mt-2">
+        <p className="text-center text-[10px] text-stone-700 mt-2">
           AI Arena may produce inaccurate information.
         </p>
       </div>

@@ -15,9 +15,9 @@ function CopyButton({ text }) {
   return (
     <button
       onClick={copy}
-      className="flex items-center gap-1 px-2 py-1 rounded text-[10px] text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
+      className="flex items-center gap-1 px-2 py-1 rounded text-[10px] text-stone-500 hover:text-stone-200 hover:bg-white/8 transition-colors"
     >
-      {copied ? <Check className="w-3 h-3 text-green-400" /> : <Copy className="w-3 h-3" />}
+      {copied ? <Check className="w-3 h-3 text-amber-400" /> : <Copy className="w-3 h-3" />}
       {copied ? 'Copied' : 'Copy'}
     </button>
   );
@@ -35,9 +35,9 @@ export default function MarkdownRenderer({ content, className = '' }) {
 
             if (!inline && match) {
               return (
-                <div className="my-3 rounded-xl overflow-hidden border border-white/10">
-                  <div className="flex items-center justify-between px-4 py-2 bg-[#1a1b26] border-b border-white/10">
-                    <span className="text-[10px] font-medium text-slate-400 uppercase tracking-wider">
+                <div className="my-3 rounded-xl overflow-hidden border border-white/[0.07]">
+                  <div className="flex items-center justify-between px-4 py-2 bg-[#1c1814] border-b border-white/[0.07]">
+                    <span className="text-[10px] font-medium text-stone-500 uppercase tracking-wider">
                       {match[1]}
                     </span>
                     <CopyButton text={codeText} />
@@ -49,7 +49,7 @@ export default function MarkdownRenderer({ content, className = '' }) {
                     customStyle={{
                       margin: 0,
                       borderRadius: 0,
-                      background: '#0d0e17',
+                      background: '#141210',
                       fontSize: '12px',
                       padding: '16px',
                     }}
@@ -63,7 +63,7 @@ export default function MarkdownRenderer({ content, className = '' }) {
 
             return (
               <code
-                className="px-1.5 py-0.5 rounded bg-white/10 text-purple-300 text-[11px] font-mono"
+                className="px-1.5 py-0.5 rounded bg-amber-900/25 text-amber-300 text-[11px] font-mono"
                 {...props}
               >
                 {children}
@@ -71,55 +71,55 @@ export default function MarkdownRenderer({ content, className = '' }) {
             );
           },
           p: ({ children }) => (
-            <p className="text-sm text-slate-200 leading-relaxed mb-3 last:mb-0">{children}</p>
+            <p className="text-sm text-stone-300 leading-relaxed mb-3 last:mb-0">{children}</p>
           ),
           h1: ({ children }) => (
-            <h1 className="text-base font-bold text-white mt-4 mb-2 first:mt-0">{children}</h1>
+            <h1 className="text-base font-bold text-stone-100 mt-4 mb-2 first:mt-0">{children}</h1>
           ),
           h2: ({ children }) => (
-            <h2 className="text-sm font-bold text-white mt-4 mb-2 first:mt-0">{children}</h2>
+            <h2 className="text-sm font-bold text-stone-100 mt-4 mb-2 first:mt-0">{children}</h2>
           ),
           h3: ({ children }) => (
-            <h3 className="text-sm font-semibold text-slate-200 mt-3 mb-1.5 first:mt-0">{children}</h3>
+            <h3 className="text-sm font-semibold text-stone-200 mt-3 mb-1.5 first:mt-0">{children}</h3>
           ),
           ul: ({ children }) => (
-            <ul className="list-disc list-inside space-y-1 mb-3 text-sm text-slate-200 ml-2">{children}</ul>
+            <ul className="list-disc list-inside space-y-1 mb-3 text-sm text-stone-300 ml-2">{children}</ul>
           ),
           ol: ({ children }) => (
-            <ol className="list-decimal list-inside space-y-1 mb-3 text-sm text-slate-200 ml-2">{children}</ol>
+            <ol className="list-decimal list-inside space-y-1 mb-3 text-sm text-stone-300 ml-2">{children}</ol>
           ),
           li: ({ children }) => <li className="leading-relaxed">{children}</li>,
           blockquote: ({ children }) => (
-            <blockquote className="border-l-2 border-purple-500/50 pl-3 my-3 text-slate-400 italic text-sm">
+            <blockquote className="border-l-2 border-amber-600/40 pl-3 my-3 text-stone-500 italic text-sm">
               {children}
             </blockquote>
           ),
           strong: ({ children }) => (
-            <strong className="font-semibold text-white">{children}</strong>
+            <strong className="font-semibold text-stone-100">{children}</strong>
           ),
-          em: ({ children }) => <em className="italic text-slate-300">{children}</em>,
-          hr: () => <hr className="border-white/10 my-4" />,
+          em: ({ children }) => <em className="italic text-stone-400">{children}</em>,
+          hr: () => <hr className="border-white/[0.08] my-4" />,
           a: ({ href, children }) => (
             <a
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-purple-400 hover:text-purple-300 underline underline-offset-2"
+              className="text-amber-400 hover:text-amber-300 underline underline-offset-2 transition-colors"
             >
               {children}
             </a>
           ),
           table: ({ children }) => (
-            <div className="overflow-x-auto my-3 rounded-xl border border-white/10">
-              <table className="w-full text-xs text-slate-300">{children}</table>
+            <div className="overflow-x-auto my-3 rounded-xl border border-white/[0.07]">
+              <table className="w-full text-xs text-stone-300">{children}</table>
             </div>
           ),
-          thead: ({ children }) => <thead className="bg-white/5 text-slate-200">{children}</thead>,
+          thead: ({ children }) => <thead className="bg-white/[0.04] text-stone-200">{children}</thead>,
           th: ({ children }) => (
-            <th className="px-3 py-2 text-left font-semibold border-b border-white/10">{children}</th>
+            <th className="px-3 py-2 text-left font-semibold border-b border-white/[0.07]">{children}</th>
           ),
           td: ({ children }) => (
-            <td className="px-3 py-2 border-b border-white/5">{children}</td>
+            <td className="px-3 py-2 border-b border-white/[0.04]">{children}</td>
           ),
         }}
       >

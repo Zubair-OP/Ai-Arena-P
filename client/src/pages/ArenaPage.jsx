@@ -24,6 +24,7 @@ export default function ArenaPage({ conversationId, onConversationCreated }) {
 
   const [currentConvId, setCurrentConvId] = useState(conversationId || null);
   const judgeRef = useRef(null);
+  const scrollContainerRef = useRef(null);
 
   useEffect(() => {
     setCurrentConvId(conversationId || null);
@@ -35,6 +36,13 @@ export default function ArenaPage({ conversationId, onConversationCreated }) {
       judgeRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
   }, [streamPhase]);
+
+  // Keep latest judge tokens visible while the judge streams
+  useEffect(() => {
+    if (scrollContainerRef.current && streamPhase === 'judge') {
+      scrollContainerRef.current.scrollTop = scrollContainerRef.current.scrollHeight;
+    }
+  }, [judgeText, streamPhase]);
 
   const handleSend = async (query, file) => {
     if (!query && !file) return;
@@ -89,9 +97,9 @@ export default function ArenaPage({ conversationId, onConversationCreated }) {
   return (
     <div className="flex flex-col h-full min-h-0">
       {/* Scrollable content area */}
-      <div className="flex-1 overflow-y-auto min-h-0 p-4 space-y-4">
+      <div ref={scrollContainerRef} className="flex-1 overflow-y-auto min-h-0 p-4 space-y-4">
         {/* Model panels side by side */}
-        <div className="flex gap-4" style={{ minHeight: '300px' }}>
+        <div className="flex gap-4 items-start">
           <ModelPanel
             model="Mixtral"
             text={modelAText}

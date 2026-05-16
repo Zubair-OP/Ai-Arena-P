@@ -16,10 +16,10 @@ export default function MessageCard({ message }) {
       {/* User query */}
       <div className="flex justify-end">
         <div className="max-w-lg flex items-start gap-2.5">
-          <div className="glass rounded-2xl rounded-tr-sm px-4 py-2.5 text-sm text-slate-200 leading-relaxed">
+          <div className="glass rounded-2xl rounded-tr-sm px-4 py-2.5 text-sm text-stone-200 leading-relaxed">
             {message.query}
           </div>
-          <div className="w-7 h-7 rounded-full bg-gradient-to-br from-purple-500 to-cyan-500 flex items-center justify-center text-xs font-bold text-white flex-shrink-0 mt-0.5">
+          <div className="w-7 h-7 rounded-full bg-gradient-to-br from-amber-600 to-orange-500 flex items-center justify-center text-xs font-bold text-white flex-shrink-0 mt-0.5">
             <User className="w-3.5 h-3.5" />
           </div>
         </div>
@@ -29,7 +29,7 @@ export default function MessageCard({ message }) {
       <div className="grid grid-cols-2 gap-3">
         <div className="glass rounded-2xl p-3 space-y-2">
           <div className="flex items-center gap-1.5">
-            <span className="text-[10px] font-semibold text-purple-400 uppercase tracking-wider">
+            <span className="text-[10px] font-semibold text-amber-400 uppercase tracking-wider">
               Model A
             </span>
           </div>
@@ -37,7 +37,7 @@ export default function MessageCard({ message }) {
         </div>
         <div className="glass rounded-2xl p-3 space-y-2">
           <div className="flex items-center gap-1.5">
-            <span className="text-[10px] font-semibold text-cyan-400 uppercase tracking-wider">
+            <span className="text-[10px] font-semibold text-[#78c4b5] uppercase tracking-wider">
               Model B
             </span>
           </div>
@@ -50,13 +50,13 @@ export default function MessageCard({ message }) {
         <div className="glass rounded-2xl overflow-hidden">
           <button
             onClick={() => setJudgeOpen((p) => !p)}
-            className="w-full flex items-center justify-between px-4 py-3 hover:bg-white/5 transition-colors"
+            className="w-full flex items-center justify-between px-4 py-3 hover:bg-white/[0.03] transition-colors"
           >
             <div className="flex items-center gap-2">
-              <Scale className="w-3.5 h-3.5 text-amber-400" />
-              <span className="text-xs font-semibold text-amber-300">Judge Verdict</span>
+              <Scale className="w-3.5 h-3.5 text-amber-500" />
+              <span className="text-xs font-semibold text-amber-400">Judge Verdict</span>
               {(message.judge?.winner || message.winner) && (
-                <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-500/10 border border-amber-400/20">
+                <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-600/10 border border-amber-500/20">
                   <Trophy className="w-2.5 h-2.5 text-amber-400" />
                   <span className="text-[10px] text-amber-300">
                     {message.judge?.winner || message.winner}
@@ -65,7 +65,7 @@ export default function MessageCard({ message }) {
               )}
             </div>
             <ChevronDown
-              className={`w-3.5 h-3.5 text-slate-400 transition-transform ${judgeOpen ? 'rotate-180' : ''}`}
+              className={`w-3.5 h-3.5 text-stone-500 transition-transform ${judgeOpen ? 'rotate-180' : ''}`}
             />
           </button>
 
@@ -77,20 +77,12 @@ export default function MessageCard({ message }) {
                 exit={{ height: 0, opacity: 0 }}
                 className="overflow-hidden"
               >
-                <div className="px-4 pb-4 space-y-3 border-t border-white/10 pt-3">
+                <div className="px-4 pb-4 space-y-3 border-t border-white/[0.07] pt-3">
                   <MarkdownRenderer content={message.judgeText || message.judge?.reasoning || ''} />
                   {message.judge && (
                     <div className="grid grid-cols-2 gap-4 pt-1">
-                      <RatingBar
-                        label="Model A"
-                        score={message.judge.ratingA}
-                        color="purple"
-                      />
-                      <RatingBar
-                        label="Model B"
-                        score={message.judge.ratingB}
-                        color="cyan"
-                      />
+                      <RatingBar label="Model A" score={message.judge.ratingA} color="purple" />
+                      <RatingBar label="Model B" score={message.judge.ratingB} color="cyan" />
                     </div>
                   )}
                 </div>

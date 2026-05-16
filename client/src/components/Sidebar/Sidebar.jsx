@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, LogOut, Zap, ChevronLeft, Loader2 } from 'lucide-react';
+import { Plus, LogOut, Flame, ChevronLeft, Loader2 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import api from '../../services/api';
 import ConversationItem from './ConversationItem';
@@ -31,7 +31,6 @@ export default function Sidebar({
       }
     };
     fetchConversations();
-
   }, [refreshTrigger]);
 
   const handleDeleted = (id) => {
@@ -71,18 +70,18 @@ export default function Sidebar({
         className="fixed left-0 top-0 h-full w-[280px] z-30 flex flex-col lg:relative lg:translate-x-0 lg:z-auto"
         style={{ transform: undefined }}
       >
-        <div className="h-full flex flex-col glass border-r border-white/10">
+        <div className="h-full flex flex-col border-r border-white/[0.07]" style={{ background: '#0d0b09' }}>
           {/* Header */}
-          <div className="flex items-center justify-between p-4 border-b border-white/10">
-            <div className="flex items-center gap-2">
-              <div className="w-7 h-7 rounded-lg bg-purple-600/30 border border-purple-500/40 flex items-center justify-center">
-                <Zap className="w-3.5 h-3.5 text-purple-400" />
+          <div className="flex items-center justify-between p-4 border-b border-white/[0.07]">
+            <div className="flex items-center gap-2.5">
+              <div className="w-7 h-7 rounded-lg bg-amber-700/20 border border-amber-600/25 flex items-center justify-center">
+                <Flame className="w-3.5 h-3.5 text-amber-400" />
               </div>
-              <span className="font-semibold text-sm text-white">AI Arena</span>
+              <span className="font-semibold text-sm text-stone-200">AI Arena</span>
             </div>
             <button
               onClick={onClose}
-              className="lg:hidden p-1.5 rounded-lg hover:bg-white/10 text-slate-400 hover:text-white transition-colors"
+              className="lg:hidden p-1.5 rounded-lg hover:bg-white/6 text-stone-500 hover:text-stone-300 transition-colors"
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
@@ -92,7 +91,7 @@ export default function Sidebar({
           <div className="p-3">
             <button
               onClick={onNewChat}
-              className="w-full flex items-center gap-2 px-3 py-2.5 rounded-xl bg-purple-600/20 hover:bg-purple-600/30 border border-purple-500/30 text-purple-300 hover:text-purple-200 text-sm font-medium transition-all"
+              className="w-full flex items-center gap-2 px-3 py-2.5 rounded-xl bg-amber-700/12 hover:bg-amber-700/22 border border-amber-600/18 text-amber-300 hover:text-amber-200 text-sm font-medium transition-all"
             >
               <Plus className="w-4 h-4" />
               New Chat
@@ -100,8 +99,8 @@ export default function Sidebar({
           </div>
 
           {/* Conversations */}
-          <div className="flex-1 overflow-y-auto px-3 space-y-1 pb-2">
-            <p className="text-[10px] font-medium text-slate-500 uppercase tracking-wider px-2 py-2">
+          <div className="flex-1 overflow-y-auto px-3 space-y-0.5 pb-2">
+            <p className="text-[10px] font-medium text-stone-600 uppercase tracking-wider px-2 py-2">
               Recent
             </p>
 
@@ -110,16 +109,16 @@ export default function Sidebar({
                 {[...Array(5)].map((_, i) => (
                   <div
                     key={i}
-                    className="h-10 rounded-xl bg-white/5 animate-pulse"
+                    className="h-10 rounded-xl bg-white/[0.04] animate-pulse"
                     style={{ opacity: 1 - i * 0.15 }}
                   />
                 ))}
               </div>
             ) : conversations.length === 0 ? (
-              <div className="text-center py-8 text-slate-500 text-xs">
+              <div className="text-center py-8 text-stone-600 text-xs">
                 <MessageSquareIcon />
                 <p className="mt-2">No conversations yet</p>
-                <p className="text-[10px] mt-1 text-slate-600">Start a new chat above</p>
+                <p className="text-[10px] mt-1 text-stone-700">Start a new chat above</p>
               </div>
             ) : (
               conversations.map((conv) => (
@@ -135,20 +134,20 @@ export default function Sidebar({
           </div>
 
           {/* User footer */}
-          <div className="p-3 border-t border-white/10">
-            <div className="flex items-center gap-2.5 px-2 py-2 rounded-xl hover:bg-white/5 transition-colors group">
-              <div className="w-7 h-7 rounded-full bg-gradient-to-br from-purple-500 to-cyan-500 flex items-center justify-center text-xs font-bold text-white flex-shrink-0">
+          <div className="p-3 border-t border-white/[0.07]">
+            <div className="flex items-center gap-2.5 px-2 py-2 rounded-xl hover:bg-white/[0.04] transition-colors group">
+              <div className="w-7 h-7 rounded-full bg-gradient-to-br from-amber-600 to-orange-500 flex items-center justify-center text-xs font-bold text-white flex-shrink-0">
                 {avatarLetter}
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-xs font-medium text-slate-200 truncate">
+                <p className="text-xs font-medium text-stone-300 truncate">
                   {user?.name || 'User'}
                 </p>
-                <p className="text-[10px] text-slate-500 truncate">{user?.email}</p>
+                <p className="text-[10px] text-stone-600 truncate">{user?.email}</p>
               </div>
               <button
                 onClick={handleLogout}
-                className="p-1.5 rounded-lg hover:bg-red-500/20 text-slate-500 hover:text-red-400 transition-colors opacity-0 group-hover:opacity-100"
+                className="p-1.5 rounded-lg hover:bg-red-500/15 text-stone-600 hover:text-red-400 transition-colors opacity-0 group-hover:opacity-100"
                 title="Logout"
               >
                 <LogOut className="w-3.5 h-3.5" />
@@ -164,7 +163,7 @@ export default function Sidebar({
 function MessageSquareIcon() {
   return (
     <svg
-      className="w-8 h-8 mx-auto text-slate-600"
+      className="w-8 h-8 mx-auto text-stone-700"
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"

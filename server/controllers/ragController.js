@@ -90,7 +90,14 @@ const queryWithFile = async (req, res) => {
       streamGeminiResponse(augmentedPrompt, socketId),
     ]);
 
-    const judgment = await judgeResponses(userQuery, contentA, contentB, socketId);
+    // Judge after both complete — fallback if judge service is unavailable
+    let judgment;
+    try {
+      judgment = await judgeResponses(userQuery, contentA, contentB, socketId);
+    } catch (judgeErr) {
+      console.error('Judge service failed, using fallback:', judgeErr.message);
+      judgment = { ratingA: 5, ratingB: 5, winner: 'tie', reasoning: 'Judgment unavailable due to service error.' };
+    }
 
     const message = await Message.create({
       conversationId: conversation._id,
@@ -100,7 +107,7 @@ const queryWithFile = async (req, res) => {
       responseA: { model: 'mixtral-8x7b-32768', provider: 'Groq', content: contentA },
       responseB: { model: 'gemini-1.5-flash', provider: 'Google Gemini', content: contentB },
       judge: {
-        model: 'mistral-large-latest',
+        model: 'mistral-small-latest',
         reasoning: judgment.reasoning,
         ratingA: judgment.ratingA,
         ratingB: judgment.ratingB,

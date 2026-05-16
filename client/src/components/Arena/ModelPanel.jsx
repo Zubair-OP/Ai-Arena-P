@@ -1,34 +1,43 @@
+import { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Cpu, Loader2 } from 'lucide-react';
 import MarkdownRenderer from '../Chat/MarkdownRenderer';
 
 export default function ModelPanel({ model, text, isStreaming, color = 'purple' }) {
+  const contentRef = useRef(null);
+
+  useEffect(() => {
+    if (contentRef.current) {
+      contentRef.current.scrollTop = contentRef.current.scrollHeight;
+    }
+  }, [text]);
+
   const colorMap = {
     purple: {
-      badge: 'bg-purple-600/20 border-purple-500/30 text-purple-300',
-      dot: 'bg-purple-400',
-      glow: 'glow-purple',
-      border: 'border-purple-500/20',
+      badge: 'bg-amber-700/15 border-amber-600/20 text-amber-400',
+      glow: 'glow-model-a',
+      border: 'border-amber-600/15',
+      spinner: 'text-amber-400/60',
     },
     cyan: {
-      badge: 'bg-cyan-500/20 border-cyan-400/30 text-cyan-300',
-      dot: 'bg-cyan-400',
-      glow: 'glow-cyan',
-      border: 'border-cyan-400/20',
+      badge: 'bg-[#5ba99a]/10 border-[#5ba99a]/20 text-[#78c4b5]',
+      glow: 'glow-model-b',
+      border: 'border-[#5ba99a]/15',
+      spinner: 'text-[#78c4b5]/60',
     },
   };
   const c = colorMap[color] || colorMap.purple;
 
   return (
-    <div className={`flex-1 flex flex-col glass rounded-2xl overflow-hidden min-h-0 ${isStreaming ? c.glow : ''} transition-shadow duration-500`}>
+    <div className={`flex-1 flex flex-col glass rounded-2xl overflow-hidden ${isStreaming ? c.glow : ''} transition-shadow duration-500`}>
       {/* Header */}
-      <div className={`flex items-center justify-between px-4 py-3 border-b ${c.border} bg-white/3`}>
+      <div className={`flex items-center justify-between px-4 py-3 border-b ${c.border} bg-white/[0.02]`}>
         <div className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border text-xs font-semibold ${c.badge}`}>
           <Cpu className="w-3 h-3" />
           {model}
         </div>
         {isStreaming && (
-          <div className="flex items-center gap-1.5 text-xs text-slate-400">
+          <div className={`flex items-center gap-1.5 text-xs ${c.spinner}`}>
             <Loader2 className="w-3 h-3 animate-spin" />
             <span>Generating…</span>
           </div>
@@ -36,10 +45,10 @@ export default function ModelPanel({ model, text, isStreaming, color = 'purple' 
       </div>
 
       {/* Content */}
-      <div className="flex-1 overflow-y-auto p-4 min-h-0">
+      <div ref={contentRef} className="overflow-y-auto p-4 max-h-[55vh]">
         {!text && !isStreaming ? (
-          <div className="h-full flex items-center justify-center">
-            <p className="text-slate-600 text-sm">Waiting for query…</p>
+          <div className="flex items-center justify-center py-10">
+            <p className="text-stone-600 text-sm">Waiting for query…</p>
           </div>
         ) : (
           <motion.div

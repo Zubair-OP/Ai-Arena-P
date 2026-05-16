@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Lock, User, Loader2, Zap } from 'lucide-react';
+import { Mail, Lock, User, Loader2, Sparkles } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import toast from 'react-hot-toast';
 
@@ -34,52 +34,52 @@ export default function Register({ onSwitch }) {
       exit={{ opacity: 0, y: -20 }}
       className="w-full max-w-md"
     >
-      <div className="glass rounded-2xl p-6 glow-purple">
-        <div className="flex items-center gap-3 mb-5">
-          <div className="w-8 h-8 rounded-xl bg-cyan-500/20 border border-cyan-400/30 flex items-center justify-center">
-            <Zap className="w-4 h-4 text-cyan-400" />
+      <div className="glass rounded-2xl p-7">
+        <div className="flex items-center gap-3 mb-6">
+          <div className="w-9 h-9 rounded-xl bg-amber-700/20 border border-amber-600/25 flex items-center justify-center">
+            <Sparkles className="w-4 h-4 text-amber-400" />
           </div>
           <div>
-            <h1 className="text-base font-semibold text-white">Create account</h1>
-            <p className="text-xs text-slate-400">Join AI Arena</p>
+            <h1 className="text-base font-semibold text-stone-100">Create account</h1>
+            <p className="text-xs text-stone-500">Join AI Arena</p>
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-3">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs font-medium text-slate-300 mb-1">Name</label>
+            <label className="block text-xs font-medium text-stone-400 mb-1.5">Name</label>
             <div className="relative">
-              <User className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400" />
+              <User className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-stone-500" />
               <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
                 placeholder="Your name"
-                className="w-full bg-white/5 border border-white/10 rounded-xl pl-9 pr-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500/50 transition-all"
+                className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl pl-9 pr-4 py-2.5 text-sm text-stone-200 placeholder-stone-600 focus:outline-none focus:border-amber-600/40 focus:bg-white/[0.06] transition-all"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-slate-300 mb-1">Email</label>
+            <label className="block text-xs font-medium text-stone-400 mb-1.5">Email</label>
             <div className="relative">
-              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400" />
+              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-stone-500" />
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 placeholder="you@example.com"
-                className="w-full bg-white/5 border border-white/10 rounded-xl pl-9 pr-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500/50 transition-all"
+                className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl pl-9 pr-4 py-2.5 text-sm text-stone-200 placeholder-stone-600 focus:outline-none focus:border-amber-600/40 focus:bg-white/[0.06] transition-all"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-slate-300 mb-1">Password</label>
+            <label className="block text-xs font-medium text-stone-400 mb-1.5">Password</label>
             <div className="relative">
-              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400" />
+              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-stone-500" />
               <input
                 type="password"
                 value={password}
@@ -87,7 +87,7 @@ export default function Register({ onSwitch }) {
                 required
                 placeholder="••••••••"
                 minLength={6}
-                className="w-full bg-white/5 border border-white/10 rounded-xl pl-9 pr-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500/50 transition-all"
+                className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl pl-9 pr-4 py-2.5 text-sm text-stone-200 placeholder-stone-600 focus:outline-none focus:border-amber-600/40 focus:bg-white/[0.06] transition-all"
               />
             </div>
           </div>
@@ -101,18 +101,18 @@ export default function Register({ onSwitch }) {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-2.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium text-xs transition-all flex items-center justify-center gap-2 mt-1"
+            className="w-full py-2.5 rounded-xl bg-amber-700 hover:bg-amber-600 disabled:opacity-50 disabled:cursor-not-allowed text-stone-100 font-medium text-sm transition-all flex items-center justify-center gap-2 mt-1 shadow-lg shadow-amber-900/20"
           >
             {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
             {loading ? 'Creating account…' : 'Create Account'}
           </button>
         </form>
 
-        <p className="text-center text-xs text-slate-400 mt-4">
+        <p className="text-center text-xs text-stone-500 mt-5">
           Already have an account?{' '}
           <button
             onClick={onSwitch}
-            className="text-cyan-400 hover:text-cyan-300 font-medium transition-colors"
+            className="text-amber-400 hover:text-amber-300 font-medium transition-colors"
           >
             Sign in
           </button>
