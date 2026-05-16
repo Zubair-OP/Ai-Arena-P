@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const http = require('http');
+const path = require('path');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const connectDB = require('./config/db');
@@ -37,6 +38,12 @@ app.use('/api/rag', ragRoutes);
 
 app.get('/health', (req, res) => {
   res.json({ success: true, data: { message: 'AI Arena server is running' } });
+});
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // Global error handler
