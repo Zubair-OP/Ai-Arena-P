@@ -1,4 +1,4 @@
-# AI Arena 🤖⚔️
+# AI Arena 
 
 A real-time AI battle platform where two AI models compete head-to-head to answer your query, and a neutral AI judge scores them objectively.
 
